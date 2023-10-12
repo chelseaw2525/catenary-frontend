@@ -1249,7 +1249,7 @@ if (browser) {
 				id: 'busshapes',
 				type: 'line',
 				source: 'busshapes',
-				'source-layer': 'shapes',
+				'source-layer': 'busonly',
 				filter: processUrlLimit([
 					'all',
 					['any', ['==', 3, ['get', 'route_type']], ['==', 11, ['get', 'route_type']]],
@@ -1274,7 +1274,7 @@ if (browser) {
 				id: 'ferryshapes',
 				type: 'line',
 				source: 'notbusshapes',
-				'source-layer': 'shapes',
+				'source-layer': 'notbus',
 				filter: ['==', 4, ['get', 'route_type']],
 				paint: {
 					'line-color': ['concat', '#', ['get', 'color']],
@@ -1291,7 +1291,7 @@ if (browser) {
 				id: 'labelbusshapes',
 				type: 'symbol',
 				source: 'busshapes',
-				'source-layer': 'shapes',
+				'source-layer': 'busonly',
 				filter: processUrlLimit([
 					'all',
 					['any', ['==', 3, ['get', 'route_type']], ['==', 11, ['get', 'route_type']]],
@@ -1326,7 +1326,7 @@ if (browser) {
 				id: 'railshapes',
 				type: 'line',
 				source: 'notbusshapes',
-				'source-layer': 'shapes',
+				'source-layer': 'notbus',
 				filter: processUrlLimit(['all', ['!=', 4, ['get', 'route_type']],
 				 ['!=', 3, ['get', 'route_type']],
 				 ['!=', 11, ['get', 'route_type']]
@@ -1345,7 +1345,7 @@ if (browser) {
 				id: 'labelrailshapes',
 				type: 'symbol',
 				source: 'notbusshapes',
-				'source-layer': 'shapes',
+				'source-layer': 'notbus',
 				filter: ['all', ['!=', 3, ['get', 'route_type']],
 				['!=', 11, ['get', 'route_type']]
 			],
@@ -1453,7 +1453,8 @@ if (browser) {
 					'line-color': ['get', darkMode === true ? 'cd' : 'color'],
 					'line-width': ['interpolate', ['linear'], ['zoom'], 9, 3, 10, 1.8, 12, 2.5, 13, 3],
 					'line-opacity': ['interpolate', ['linear'], ['zoom'], 6, 0, 7, 0.9]
-				}
+				},
+				minzoom: 7
 			});
 
 			map.addSource('railbearings', {
@@ -1495,7 +1496,8 @@ if (browser) {
 					'circle-stroke-width': 0.8,
 					'circle-opacity':
 						darkMode == true ? ['interpolate', ['linear'], ['zoom'], 8, 0, 8.2, 0.7] : 0.5
-				}
+				},
+				minzoom: 7
 			});
 
 			map.addLayer({
