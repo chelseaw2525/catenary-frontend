@@ -32,6 +32,8 @@
 	let avaliablerealtimealerts = new Set();
 	let fetchedavaliablekactus = false;
 
+	let showmyself = true;
+
 	let static_feeds: any[] = [];
 
 	let current_map_heading = 0;
@@ -1813,7 +1815,7 @@ if (browser) {
 					geolocationdata.setData({
 						type: 'FeatureCollection',
 						features: [
-							{
+							 {
 								type: 'Feature',
 								geometry: {
 									type: 'Point',
@@ -1823,7 +1825,7 @@ if (browser) {
 									accuracy: location.coords.accuracy,
 									heading: location.coords.heading
 								}
-							}
+							} 
 						]
 					});
 
@@ -2142,6 +2144,28 @@ if (browser) {
 		class="align-middle my-auto w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
 	/>
 	<label for="show-zombie-buses" class='ml-2'>Show Tripless Vehicles</label></div>
+
+	<div><input
+		on:click={(x) => {
+			
+			showmyself = !showmyself;
+
+			mapglobal.getLayer("nobearing_position").setLayoutProperty("visibility", showmyself ? "visible" : "none")
+			mapglobal.getLayer("userpositionacclayer").setLayoutProperty("visibility", showmyself ? "visible" : "none")
+		}}	
+	
+	on:keydown={(x) => {
+		showmyself = !showmyself;
+
+		mapglobal.getLayer("nobearing_position").setLayoutProperty("visibility", showmyself ? "visible" : "none")
+			mapglobal.getLayer("userpositionacclayer").setLayoutProperty("visibility", showmyself ? "visible" : "none")
+	}}
+		checked={showmyself}
+		id="personalinfo"
+		type="checkbox"
+		class="align-middle my-auto w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+	/>
+	<label for="personalinfo" class='ml-2'>Show Myself</label></div>
 </div>
 
 <div
