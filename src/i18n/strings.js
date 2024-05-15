@@ -194,7 +194,7 @@ const i18n = {
         language: '語言',
         // layers
         headingRail: '鐵路',
-        headingLocalRail: '捷運 (MRT)',
+        headingLocalRail: '捷運/輕軌',
         headingIntercityRail: '鐵路',
         headingBus: '公車',
         headingOther: '其他',
